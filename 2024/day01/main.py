@@ -17,14 +17,14 @@ def total_distance(lists):
     sorted_lists = [sorted(nums) for nums in lists]
 
     # get the distances
-    total_distance = sum(
+    total = sum(
         [
             abs(sorted_lists[0][i] - sorted_lists[1][i])
             for i in range(len(sorted_lists[0]))
         ]
     )
 
-    print(f"total distance: {total_distance}")
+    print(f"total distance: {total}")
 
 
 def similarity(lists):
