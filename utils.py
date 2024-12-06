@@ -1,6 +1,10 @@
 import re
 
 
+def read_lines_as_matrix(lines):
+    return [[c for c in line.strip()] for line in lines if line.strip()]
+
+
 def format_lines_as_numbers(lines):
     # group lines into lists
     number_lines = [line.strip() for line in lines if line.strip()]

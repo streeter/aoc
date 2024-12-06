@@ -1,6 +1,6 @@
 import pytest
 
-from main import compute, tokenize
+from day03 import compute, tokenize
 
 
 @pytest.mark.parametrize(
