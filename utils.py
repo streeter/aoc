@@ -1,4 +1,5 @@
 import re
+from typing import Callable
 
 
 def read_lines_as_matrix(lines):
@@ -9,6 +10,18 @@ def format_lines_as_numbers(lines):
     # group lines into lists
     number_lines = [line.strip() for line in lines if line.strip()]
     return [[int(num) for num in line.split()] for line in number_lines]
+
+
+def split_and_cast[T](
+    seq: list[str], sep: str | None = None, cast: Callable[[str], T] = int
+) -> list[T]:
+    return [cast(item) for item in seq.split(sep=sep)]
+
+
+def middle_of_list[T](seq: list[T]) -> T:
+    middle = round((len(seq) - 1) / 2)
+
+    return seq[middle]
 
 
 class Scanner(object):
