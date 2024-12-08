@@ -2,6 +2,11 @@ import re
 from typing import Callable
 
 
+def read_input_lines(name="input.txt"):
+    with open("input.txt", "r") as fp:
+        return fp.readlines()
+
+
 class Matrix(list):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

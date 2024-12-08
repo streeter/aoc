@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from utils import read_lines_as_matrix
+from utils import read_input_lines, read_lines_as_matrix
 
 
 def is_valid_coordinate(x, y, max_x, max_y):
@@ -84,8 +84,7 @@ def search_matrix_for_x(mat, word):
 
 
 if __name__ == "__main__":
-    with open("input.txt", "r") as fp:
-        lines = fp.readlines()
+    lines = read_input_lines()
 
     mat = read_lines_as_matrix(lines)
 

@@ -2,7 +2,7 @@
 
 import sys
 
-from utils import read_lines_as_matrix
+from utils import read_input_lines, read_lines_as_matrix
 
 
 GUARDS = ["^", ">", "v", "<"]
@@ -89,8 +89,7 @@ def move_guard(mat, obstacle_loc=None):
 
 
 if __name__ == "__main__":
-    with open("input.txt", "r") as fp:
-        lines = fp.readlines()
+    lines = read_input_lines()
 
     mat = read_lines_as_matrix(lines)
 

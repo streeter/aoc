@@ -3,7 +3,7 @@
 from functools import cmp_to_key
 
 
-from utils import middle_of_list, split_and_cast
+from utils import read_input_lines, middle_of_list, split_and_cast
 
 
 def is_correctly_ordered(update, rules):
@@ -55,8 +55,7 @@ def fix_ordering(update, rules):
 
 
 if __name__ == "__main__":
-    with open("input.txt", "r") as fp:
-        lines = fp.readlines()
+    lines = read_input_lines()
 
     rules = [split_and_cast(line, "|") for line in lines if "|" in line]
     page_updates = [split_and_cast(line, ",") for line in lines if "," in line]
