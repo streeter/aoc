@@ -2,8 +2,25 @@ import re
 from typing import Callable
 
 
-def read_lines_as_matrix(lines):
-    return [[c for c in line.strip()] for line in lines if line.strip()]
+class Matrix(list):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __str__(self):
+        return (
+            "[\n"
+            + "\n".join(
+                [
+                    "[\t" + ",\t".join(['"{}"'.format(col) for col in row]) + "]"
+                    for row in self
+                ]
+            )
+            + " ]"
+        )
+
+
+def read_lines_as_matrix(lines: list[str]) -> list[list[str]]:
+    return Matrix([[c for c in line.strip()] for line in lines if line.strip()])
 
 
 def format_lines_as_numbers(lines):
@@ -168,3 +185,24 @@ class Scanner(object):
 
     def rest(self):
         return self.src[self.offset :]
+
+
+def bundles(inp):
+    """
+    Generator to turn input array from file with multi-line sequences divided by
+    blank lines into something you can loop over.
+    e.g.
+    ```
+    input = [i.strip() for i in open("input.txt","r").readlines()]
+
+    max([sum(map(int, line)) for line in bundles(inp)])
+    ```
+    """
+    r = []
+    for line in inp:
+        if line == "":
+            yield r
+            r = []
+        else:
+            r.append(line)
+    yield (r)
