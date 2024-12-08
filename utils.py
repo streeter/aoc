@@ -24,6 +24,14 @@ class Matrix(list):
         )
 
 
+def lmap(func, *iterables):  # thanks dps
+    return list(map(func, *iterables))
+
+
+def ints(input: str) -> list[int]:  # thanks dps
+    return lmap(int, re.findall(r"-?\d+", input))
+
+
 def read_lines_as_matrix(lines: list[str]) -> list[list[str]]:
     return Matrix([[c for c in line.strip()] for line in lines if line.strip()])
 

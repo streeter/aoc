@@ -75,7 +75,8 @@ if __name__ == "__main__":
     os.makedirs(day_dir, exist_ok=True)
 
     # create the day file
-    with open(os.path.join(day_dir, day_name + ".py"), "w") as day_file:
+    file_path = os.path.join(day_dir, day_name + ".py")
+    with open(file_path, "w") as day_file:
         day_file.write(
             DAY_TEMPLATE.format(
                 year=year_str,
@@ -83,6 +84,8 @@ if __name__ == "__main__":
                 day_name=day_name,
             )
         )
+
+    os.chmod(file_path, 0o744)
 
     # create the test file
     with open(os.path.join(day_dir, "test_" + day_name + ".py"), "w") as test_file:
