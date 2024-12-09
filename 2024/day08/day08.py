@@ -10,41 +10,41 @@ from utils import read_input_lines
 def compute_antinodes(
     pos1: tuple[int, int], pos2: tuple[int, int]
 ) -> list[tuple[int, int]]:
-    row_dist = pos1[0] - pos2[0]
-    col_dist = pos1[1] - pos2[1]
+    row_dist = pos2[0] - pos1[0]
+    col_dist = pos2[1] - pos1[1]
 
     return [
         an
         for an in [
-            (pos1[0] + row_dist, pos1[1] + col_dist),
             (pos1[0] - row_dist, pos1[1] - col_dist),
             (pos2[0] + row_dist, pos2[1] + col_dist),
-            (pos2[0] - row_dist, pos2[1] - col_dist),
         ]
-        if an not in (pos1, pos2)
     ]
 
 
 def compute_all_antinodes(
     max_row: int, max_col: int, positions: list[tuple[int, int]]
 ) -> set[tuple[int, int]]:
-    antinodes = set()
-
     if len(positions) < 2:
-        return antinodes
+        return set()
+
+    antinodes = set(positions)
 
     combos = combinations(positions, 2)
     for pos1, pos2 in combos:
-        results = compute_antinodes(pos1, pos2)
+        # distance apart
+        row_dist = pos2[0] - pos1[0]
+        col_dist = pos2[1] - pos1[1]
 
-        in_bounds = [
-            n
-            for n in results
-            if (n[0] >= 0 and n[0] < max_row and n[1] >= 0 and n[1] < max_col)
-        ]
+        next = (pos1[0] - row_dist, pos1[1] - col_dist)
+        while next[0] >= 0 and next[0] < max_row and next[1] >= 0 and next[1] < max_col:
+            antinodes.add(next)
+            next = (next[0] - row_dist, next[1] - col_dist)
 
-        for n in in_bounds:
-            antinodes.add(n)
+        next = (pos2[0] + row_dist, pos2[1] + col_dist)
+        while next[0] >= 0 and next[0] < max_row and next[1] >= 0 and next[1] < max_col:
+            antinodes.add(next)
+            next = (next[0] + row_dist, next[1] + col_dist)
 
     return antinodes
 
