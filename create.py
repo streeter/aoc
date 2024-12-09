@@ -12,25 +12,31 @@ DAY_TEMPLATE = """#!/usr/bin/env python
 from utils import read_input_lines
 
 
-def print_lines(lines):
-    for line in lines:
-        print(line)
+def sum_lengths(lines):
+    return sum([len(line) for line in lines])
 
 
 if __name__ == "__main__":
     lines = read_input_lines()
 
     # TODO
-    print_lines(lines)
+    sum_lengths(lines)
 """
 
 TEST_TEMPLATE = """import pytest
 
-from {day_name} import print_lines
+from {day_name} import sum_lengths
 
 
-def test_print_lines():
-    print_lines(["test line"])
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        [["abc", "def"], 6],
+    ],
+)
+def test_sum_lengths(input, expected):
+    assert sum_lengths(input) == expected
+
 """
 
 
