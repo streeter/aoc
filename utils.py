@@ -1,10 +1,12 @@
 import re
 from typing import Callable
 
+from ordered_set import OrderedSet
+
 
 def read_input_lines(name="input.txt"):
     with open("input.txt", "r") as fp:
-        return fp.readlines()
+        return [l.strip() for l in fp.readlines()]
 
 
 class Matrix(list):
@@ -28,8 +30,13 @@ def lmap(func, *iterables):  # thanks dps
     return list(map(func, *iterables))
 
 
+def chars(input: str, pattern=r"[A-Za-z0-9]+?") -> list[str]:
+    return list(OrderedSet(re.findall(pattern, input)))
+
+
 def ints(input: str) -> list[int]:  # thanks dps
-    return lmap(int, re.findall(r"-?\d+", input))
+    # find numbers, with a potential negative sign
+    return lmap(int, chars(input, pattern=r"-?\d+"))
 
 
 def read_lines_as_matrix(lines: list[str]) -> list[list[str]]:
